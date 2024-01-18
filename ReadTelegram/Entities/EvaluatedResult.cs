@@ -17,11 +17,19 @@ public partial class EvaluatedResult
 
     public long UserId { get; set; }
 
+    public long? RelevanceId { get; set; }
+
+    public DateTime CreateDate { get; set; }
+
+    public string? TitleUserEnterd { get; set; }
+
     public virtual EstimateNews Estimate { get; set; } = null!;
 
     public virtual FieldOfUse FieldOfUse { get; set; } = null!;
 
     public virtual NewsRssReed News { get; set; } = null!;
+
+    public virtual NewsRelevance? Relevance { get; set; }
 
     public virtual StatisticalSource StatisticalSource { get; set; } = null!;
 }

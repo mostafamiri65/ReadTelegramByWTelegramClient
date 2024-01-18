@@ -27,5 +27,7 @@ public partial class TbRole
 
     public bool IsSecretary { get; set; }
 
+    public bool IsBoss { get; set; }
+
     public virtual ICollection<TbUserRole> TbUserRoles { get; set; } = new List<TbUserRole>();
 }

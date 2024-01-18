@@ -23,6 +23,10 @@ public partial class NewsSourceDetail
 
     public long? ModifiedBy { get; set; }
 
+    public bool ReadBySite { get; set; }
+
+    public bool? IsTelegram { get; set; }
+
     public virtual ICollection<NewsSourceDetail> InverseSourceDetail { get; set; } = new List<NewsSourceDetail>();
 
     public virtual NewsSource? NewsSource { get; set; }

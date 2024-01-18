@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace ReadTelegram.Entities;
 
-public partial class TbUser
+public partial class SendMob
 {
-    public long Id { get; set; }
-
-    public string? Username { get; set; }
-
-    public string? Password { get; set; }
+    public int Id { get; set; }
 
     public string? Mobile { get; set; }
 
-    public string? FullName { get; set; }
+    public bool? IsSend { get; set; }
+
+    public string? Name { get; set; }
+
+    public int? SendMobTypId { get; set; }
 
     public DateTime CreateDate { get; set; }
 
@@ -29,7 +29,5 @@ public partial class TbUser
 
     public Guid? Gid { get; set; }
 
-    public bool? IsPrivateInList { get; set; }
-
-    public virtual ICollection<TbUserRole> TbUserRoles { get; set; } = new List<TbUserRole>();
+    public bool? IsAdmin { get; set; }
 }

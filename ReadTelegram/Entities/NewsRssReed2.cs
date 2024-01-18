@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ReadTelegram.Entities;
 
-public partial class NewsRssReed
+public partial class NewsRssReed2
 {
     public long Id { get; set; }
 
@@ -43,11 +43,7 @@ public partial class NewsRssReed
 
     public bool? IsOil { get; set; }
 
-    public int NotOil { get; set; }
+    public bool? NotOil { get; set; }
 
     public long? UserIdThatMakeIdNotOil { get; set; }
-
-    public long? TlgId { get; set; }
-
-    public virtual ICollection<EvaluatedResult> EvaluatedResults { get; set; } = new List<EvaluatedResult>();
 }

@@ -27,5 +27,9 @@ public partial class TelegramPost
 
     public DateTime CreateDate { get; set; }
 
+    public bool? IsSend { get; set; }
+
+    public DateTime? ProcDate { get; set; }
+
     public virtual TelegramChannel TelegramChannel { get; set; } = null!;
 }

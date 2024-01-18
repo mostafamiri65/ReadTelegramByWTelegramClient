@@ -34,4 +34,8 @@ public partial class NewsInserted
     public Guid Gid { get; set; }
 
     public int? ManagementSourceId { get; set; }
+
+    public string? EstimateDscp { get; set; }
+
+    public long? NegativeReasonId { get; set; }
 }

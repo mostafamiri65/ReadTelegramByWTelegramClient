@@ -14,17 +14,16 @@ namespace ReadTelegram.Api
 
         public async Task PostAsync(TelegramPost post)
         {
-            var isexist = await context.TelegramPosts.AnyAsync(a=>a.PostId == post.PostId && 
-            a.TelegramChannelId == post.TelegramChannelId);
+            //var isexist = await context.TelegramPosts.AnyAsync(a=>a.PostId == post.PostId && 
+            //a.TelegramChannelId == post.TelegramChannelId);
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("A new Post");
-            if(!isexist)
-            {
+           
                 await context.AddAsync(post);
                 await context.SaveChangesAsync();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("A new Post Saved ..");
-            }
+            
           
         }
         public async Task<bool> CheckForExisting(long postId, long channelId)

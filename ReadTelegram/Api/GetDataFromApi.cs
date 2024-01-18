@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using ReadTelegram.Entities;
 using System.Net.Http.Json;
 
@@ -21,6 +22,18 @@ namespace ReadTelegram.Api
             //}
             var channels = await context.TelegramChannels.ToListAsync();
             return channels;
+        }
+
+        public async Task<long> MaxPostId(long telegramChannelId)
+        {
+
+            var max = await context.TelegramPosts.Where(p => p.TelegramChannelId == telegramChannelId)
+                .OrderByDescending(p => p.PostId).ToListAsync();
+            if (max.Count == 0)
+            {
+                return 0;
+            }
+            return max[0].PostId;
         }
     }
 }
