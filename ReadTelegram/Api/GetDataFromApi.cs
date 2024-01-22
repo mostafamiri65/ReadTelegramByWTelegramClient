@@ -20,20 +20,38 @@ namespace ReadTelegram.Api
             //{
             //    channels = await response.Content.ReadFromJsonAsync<List<TelegramChannel>>();
             //}
-            var channels = await context.TelegramChannels.ToListAsync();
-            return channels;
+            try
+            {
+                var channels = await context.TelegramChannels.ToListAsync();
+                return channels;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         public async Task<long> MaxPostId(long telegramChannelId)
         {
 
-            var max = await context.TelegramPosts.Where(p => p.TelegramChannelId == telegramChannelId)
-                .OrderByDescending(p => p.PostId).ToListAsync();
-            if (max.Count == 0)
+            try
             {
-                return 0;
+                var max = await context.TelegramPosts.Where(p => p.TelegramChannelId == telegramChannelId)
+                    .OrderByDescending(p => p.PostId).ToListAsync();
+                if (max.Count == 0)
+                {
+                    return 0;
+                }
+
+                return max[0].PostId;
             }
-            return max[0].PostId;
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

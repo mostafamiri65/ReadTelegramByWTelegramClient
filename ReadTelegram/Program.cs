@@ -1,5 +1,6 @@
 ﻿using ReadTelegram.Api;
 using ReadTelegram.Entities;
+using System.Collections.Generic;
 using TL;
 using Message = TL.Message;
 
@@ -25,6 +26,18 @@ var chats = await client.Messages_GetAllChats();
 
 #endregion
 
+//// Specify the path to the text file
+//string filePath = "output.txt";
+
+//// Write key-value pairs to the text file
+//using (StreamWriter writer = new StreamWriter(filePath))
+//{
+//    foreach (var pair in chats.chats)
+//    {
+//        writer.WriteLine($"{pair.Key} : {pair.Value.Title}");
+//    }
+
+//}
 
 while (true)
 {
@@ -46,6 +59,9 @@ while (true)
             Thread.Sleep(5000);
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("System read " + channel.TelegramChannelName + " channel");
+            var oneWeekAgo = DateTime.Now - TimeSpan.FromDays(7);
+            var timestampOneWeekAgo = new DateTimeOffset(oneWeekAgo).ToUnixTimeSeconds();
+
             InputPeer peer = chats.chats[channel.TelegramChannelId]; // the chat (or User) we want
 
             for (int offset_id = 0; ;)
@@ -69,7 +85,7 @@ while (true)
                         post.PostUsername = from.MainUsername;
                         post.CreateDate = DateTime.Now;
                         DateTime date = Convert.ToDateTime(post.PostDate);
-                        if (date < DateTime.Now.AddDays(-20))
+                        if (date < DateTime.Now.AddDays(-7))
                             break;
                         if (post.PostId > last)
                         {
@@ -102,7 +118,10 @@ while (true)
                     else if (msgBase is MessageService ms)
                         Console.WriteLine($"{from} [{ms.action.GetType().Name[13..]}]");
                 }
+
                 offset_id = messages2.Messages[^1].ID;
+                if(offset_id<last)
+                    break;
             }
             Thread.Sleep(4 * 60 * 1000);
 
